@@ -4,12 +4,12 @@
 
 var result = [];
 
-function print(obj) {
+function print(obj, findme) {
   for(var data in obj) {
     if( typeof(obj[data]) == "object" ) {
-      print(obj[data])
+      print(obj[data], findme)
     } else {
-      if(obj[data] == "4") {
+      if(obj[data] == findme) {
         result.push(data)
       }
     }
@@ -30,7 +30,7 @@ var obj = {
     l: 4,
     m: {
       n: 9,
-      p: 4,
+      p: "www",
     },
     x: 4,
     y: {
@@ -40,4 +40,6 @@ var obj = {
   r: 3
 };
 
-console.log(print(obj));
+console.log(print(obj, 9));
+
+// Jika anda menemukan jalan yang lebih perform, silahkan masukkan sangat saya harapkan.
