@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Alamat Anda Disini Bukan ?</title>
+	<meta name="referrer" content="no-referrer">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="//www.terpusat.com/assets/frontend/assets/js/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+</head>
+<body>
+	<script>
+	    var geocoder = new google.maps.Geocoder();
+	    function initialize() {
+	        if (navigator.geolocation) {
+	            navigator.geolocation.getCurrentPosition(function(position) {
+	                var latlng = {
+	                    lat: parseFloat(position.coords.latitude), 
+	                    lng: parseFloat(position.coords.longitude)
+	                }
+	                var mTag = document.getElementsByTagName('body');
+	                mTag[0].innerHTML = "Latitude :" + latlng.lat + " Longitude :" + latlng.lng;
+	                geocoder.geocode({'location': latlng}, function(results, status) {
+	                    if(status == google.maps.GeocoderStatus.OK) {
+	                        if(results[1]) {
+	                            console.log(results[7].long_name);
+	                            var address = results[0].formatted_address;
+	                            alert("address = " + address);
+	                        } else {
+	                            alert("No results found");
+	                        }
+	                    } else {
+	                        alert("Geocoder failed due to: " + status);
+	                    }
+	                });
+	            });
+	        }
+	    }
+	    initialize();
+    </script>
+</body>
+</html>
